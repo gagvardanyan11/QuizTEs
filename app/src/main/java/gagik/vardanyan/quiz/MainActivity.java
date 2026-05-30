@@ -33,7 +33,7 @@ import java.util.concurrent.Executors;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button btnStart;
+    private MaterialButton btnStart;
     private TextInputEditText etTopic;
     private MaterialButtonToggleGroup tgMode;
     private MaterialButtonToggleGroup tgDifficulty;
@@ -149,14 +149,20 @@ public class MainActivity extends AppCompatActivity {
             if (topicText.isEmpty()) topicText = "Java";
 
             int diff = 0;
-            if (tgDifficulty.getCheckedButtonId() == R.id.btnMedium) diff = 1;
-            else if (tgDifficulty.getCheckedButtonId() == R.id.btnHard) diff = 2;
-
             int questionCount = 5;
+            int timeSec = 25;
+
+            if (tgDifficulty.getCheckedButtonId() == R.id.btnMedium) {
+                diff = 1;
+                questionCount = 10;
+                timeSec = 20;
+            } else if (tgDifficulty.getCheckedButtonId() == R.id.btnHard) {
+                diff = 2;
+                questionCount = 15;
+                timeSec = 15;
+            }
+
             boolean timerEnabled = true;
-            int timeSec = 10;
-            if (diff == 1) timeSec = 15;
-            else if (diff == 2) timeSec = 20;
 
             String apiKey = AiQuizService.getApiKey(this);
             if (apiKey.isEmpty()) {
@@ -165,55 +171,21 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
 
-            String finalTopic = topicText;
-            int finalDiff = diff;
-            int finalTimeSec = timeSec;
-
-            executor.execute(() -> {
-                try {
-                    String apiKeyForStyle = BuildConfig.GEMINI_API_KEY;
-                    String styleJson = AiQuizService.suggestCategoryStyle(apiKeyForStyle, finalTopic);
-                    
-                    // If Gemini returns markdown-wrapped JSON, clean it
-                    if (styleJson.contains("```")) {
-                        styleJson = styleJson.replaceAll("(?s)```(?:json)?\\s*(.*?)\\s*```", "$1").trim();
-                    }
-                    
-                    String style;
-                    try {
-                        JSONObject obj = new JSONObject(styleJson);
-                        style = obj.optString("style", "Normal");
-                    } catch (Exception e) {
-                        style = "Normal";
-                    }
-
-                    final String finalStyle = style;
-                    runOnUiThread(() -> {
-                        new AlertDialog.Builder(this)
-                                .setTitle("Стиль квиза ✨")
-                                .setMessage("ИИ предлагает провести квиз в определенном стиле. Хотите попробовать?")
-                                .setPositiveButton("Да", (d, w) -> startQuizSequence(finalTopic, finalDiff, finalTimeSec, finalStyle))
-                                .setNegativeButton("Обычный", (d, w) -> startQuizSequence(finalTopic, finalDiff, finalTimeSec, "Normal"))
-                                .show();
-                    });
-                } catch (Exception e) {
-                    runOnUiThread(() -> startQuizSequence(finalTopic, finalDiff, finalTimeSec, "Normal"));
-                }
-            });
+            startQuizSequence(topicText, diff, questionCount, timeSec, "Normal");
         });
     }
 
-    private void startQuizSequence(String topic, int diff, int timeSec, String style) {
+    private void startQuizSequence(String topic, int diff, int questionCount, int timeSec, String style) {
         setLoading(true);
         executor.execute(() -> {
             try {
-                // 1. Проверяем кэշ в базе
+                // 1. Проверяем кэш в базе
                 CachedQuiz cached = AppDatabase.getInstance(this).quizDao().getCachedQuiz(topic);
 
                 if (cached != null) {
                     runOnUiThread(() -> {
                         setLoading(false);
-                        launchQuiz(topic, 5, true, timeSec, cached.jsonContent);
+                        launchQuiz(topic, questionCount, true, timeSec, cached.jsonContent);
                     });
                     return;
                 }
@@ -224,7 +196,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 
                 // Note: Updated generateQuizJson signature
-                String quizJson = AiQuizService.generateQuizJson(apiKey, topic, 5, diff, timeSec, style);
+                String quizJson = AiQuizService.generateQuizJson(apiKey, topic, questionCount, diff, timeSec, style);
 
                 // 2. Сохраняем в кэш
                 AppDatabase.getInstance(this).quizDao().insertCachedQuiz(
@@ -233,7 +205,7 @@ public class MainActivity extends AppCompatActivity {
 
                 runOnUiThread(() -> {
                     setLoading(false);
-                    launchQuiz(topic, 5, true, timeSec, quizJson);
+                    launchQuiz(topic, questionCount, true, timeSec, quizJson);
                 });
             } catch (Exception e) {
                 runOnUiThread(() -> {
@@ -244,7 +216,7 @@ public class MainActivity extends AppCompatActivity {
                     } else {
                         Toast.makeText(this, "Ошибка ИИ: " + mapAiError(e), Toast.LENGTH_LONG).show();
                     }
-                    startOffline(topic, diff, 5, true, timeSec);
+                    startOffline(topic, diff, questionCount, true, timeSec);
                 });
             }
         });
@@ -366,7 +338,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void startDailyQuiz(String topic) {
-        String apiKey = BuildConfig.GEMINI_API_KEY == null ? "" : BuildConfig.GEMINI_API_KEY.trim();
+        String apiKey = AiQuizService.getApiKey(this);
         setLoading(true);
 
         executor.execute(() -> {
@@ -670,9 +642,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setLoading(boolean loading) {
-        progressAi.setVisibility(loading ? View.VISIBLE : View.GONE);
-        btnStart.setEnabled(!loading);
-        btnStart.setAlpha(loading ? 0.6f : 1f);
+        if (loading) {
+            progressAi.show();
+            btnStart.setEnabled(false);
+            btnStart.setText("");
+            btnStart.setIcon(null);
+        } else {
+            progressAi.hide();
+            btnStart.setEnabled(true);
+            btnStart.setText("ИГРАТЬ");
+            btnStart.setIconResource(android.R.drawable.ic_media_play);
+        }
     }
 
     private String mapAiError(Exception e) {

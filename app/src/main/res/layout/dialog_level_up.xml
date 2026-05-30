@@ -40,5 +40,5 @@
         android:layout_height="64dp"
         android:layout_marginTop="32dp"
         android:text="КРУТО!"
-        app:cornerRadius="20dp" />
+        app:cornerRadius="32dp" />
 </LinearLayout>

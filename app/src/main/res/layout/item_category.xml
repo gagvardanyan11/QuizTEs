@@ -11,7 +11,7 @@
         android:id="@+id/cardCategory"
         android:layout_width="160dp"
         android:layout_height="120dp"
-        app:cardCornerRadius="24dp"
+        app:cardCornerRadius="32dp"
         app:cardElevation="0dp"
         app:cardBackgroundColor="@color/option_bg"
         app:strokeWidth="0dp">
@@ -26,7 +26,7 @@
                 android:id="@+id/iconContainer"
                 android:layout_width="56dp"
                 android:layout_height="56dp"
-                app:cardCornerRadius="16dp"
+                app:cardCornerRadius="20dp"
                 app:cardElevation="0dp"
                 app:cardBackgroundColor="@color/brand_blue">
 

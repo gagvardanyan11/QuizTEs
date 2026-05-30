@@ -28,7 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        app:cardCornerRadius="24dp"
+        app:cardCornerRadius="32dp"
         app:cardElevation="0dp"
         app:strokeWidth="1dp"
         app:strokeColor="@color/track_gray"
@@ -169,7 +169,7 @@
         android:textColor="@android:color/white"
         android:textSize="16sp"
         app:backgroundTint="@color/brand_purple"
-        app:cornerRadius="20dp" />
+        app:cornerRadius="32dp" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnHome"

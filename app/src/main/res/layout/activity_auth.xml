@@ -57,16 +57,6 @@
                     android:textStyle="bold"
                     android:fontFamily="sans-serif-black" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:text="@string/auth_title_ai"
-                    android:textColor="@color/brand_purple"
-                    android:textSize="26sp"
-                    android:textStyle="bold"
-                    android:fontFamily="sans-serif-black" />
-
             </LinearLayout>
 
             <!-- Google Button -->
@@ -80,7 +70,7 @@
                 android:textColor="@color/border_dark"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                app:cornerRadius="24dp"
+                app:cornerRadius="32dp"
                 app:icon="@drawable/ic_google"
                 app:iconGravity="textStart"
                 app:iconPadding="12dp"
@@ -105,7 +95,7 @@
                     android:textSize="14sp"
                     android:textStyle="bold"
                     app:backgroundTint="@color/auth_btn_email"
-                    app:cornerRadius="24dp" />
+                    app:cornerRadius="32dp" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnGuest"
@@ -117,7 +107,7 @@
                     android:textSize="14sp"
                     android:textStyle="bold"
                     app:backgroundTint="@color/auth_btn_guest"
-                    app:cornerRadius="24dp" />
+                    app:cornerRadius="32dp" />
             </LinearLayout>
 
             <!-- Login Form (Initially Hidden) -->
@@ -133,7 +123,11 @@
                     style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/auth_username_hint">
+                    android:hint="@string/auth_username_hint"
+                    app:boxCornerRadiusBottomEnd="28dp"
+                    app:boxCornerRadiusBottomStart="28dp"
+                    app:boxCornerRadiusTopEnd="28dp"
+                    app:boxCornerRadiusTopStart="28dp">
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etUsername"
                         android:layout_width="match_parent"
@@ -146,7 +140,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:hint="@string/auth_password_hint"
-                    app:passwordToggleEnabled="true">
+                    app:passwordToggleEnabled="true"
+                    app:boxCornerRadiusBottomEnd="28dp"
+                    app:boxCornerRadiusBottomStart="28dp"
+                    app:boxCornerRadiusTopEnd="28dp"
+                    app:boxCornerRadiusTopStart="28dp">
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etPassword"
                         android:layout_width="match_parent"
@@ -160,7 +158,7 @@
                     android:layout_height="56dp"
                     android:layout_marginTop="16dp"
                     android:text="@string/auth_btn_login"
-                    app:cornerRadius="20dp" />
+                    app:cornerRadius="28dp" />
 
                 <TextView
                     android:id="@+id/tvSwitchAuth"

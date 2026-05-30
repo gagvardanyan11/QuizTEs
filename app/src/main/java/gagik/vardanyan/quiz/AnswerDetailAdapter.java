@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 
 import java.util.List;
@@ -54,7 +55,7 @@ public class AnswerDetailAdapter extends RecyclerView.Adapter<AnswerDetailAdapte
         h.cardView.setStrokeColor(h.itemView.getContext().getColor(colorRes));
         h.cardView.setStrokeWidth(3);
 
-        h.itemView.findViewById(R.id.btnExplain).setOnClickListener(v -> {
+        h.btnExplain.setOnClickListener(v -> {
             showAiExplanation(v.getContext(), d.getQuestionText(), correctText);
         });
     }
@@ -65,27 +66,30 @@ public class AnswerDetailAdapter extends RecyclerView.Adapter<AnswerDetailAdapte
         dialog.setContentView(view);
 
         TextView tvContent = view.findViewById(R.id.tvExplanationContent);
-        View progress = view.findViewById(R.id.progressExplanation);
+        com.google.android.material.progressindicator.CircularProgressIndicator progress = view.findViewById(R.id.progressExplanation);
         View btnClose = view.findViewById(R.id.btnDismiss);
         View btnSave = view.findViewById(R.id.btnSave);
         
         if (btnClose != null) btnClose.setOnClickListener(v -> dialog.dismiss());
         if (btnSave != null) btnSave.setEnabled(false);
 
+        if (progress != null) progress.show();
         dialog.show();
 
         String apiKey = AiQuizService.getApiKey(context);
+        android.os.Handler mainHandler = new android.os.Handler(android.os.Looper.getMainLooper());
+
         if (apiKey == null || apiKey.isEmpty()) {
-            tvContent.setText("Ошибка: API ключ не найден.");
-            progress.setVisibility(View.GONE);
+            tvContent.setText("Ошибка: API ключ не найден в настройках.");
+            if (progress != null) progress.hide();
             return;
         }
 
         executor.execute(() -> {
             try {
                 String explanation = AiQuizService.getExplanation(apiKey, question, answer);
-                ((android.app.Activity) context).runOnUiThread(() -> {
-                    progress.setVisibility(View.GONE);
+                mainHandler.post(() -> {
+                    if (progress != null) progress.hide();
                     tvContent.setText(explanation);
                     if (btnSave != null) {
                         btnSave.setEnabled(true);
@@ -97,9 +101,9 @@ public class AnswerDetailAdapter extends RecyclerView.Adapter<AnswerDetailAdapte
                     }
                 });
             } catch (Exception e) {
-                ((android.app.Activity) context).runOnUiThread(() -> {
-                    progress.setVisibility(View.GONE);
-                    tvContent.setText("Не удалось получить объяснение. Проверьте интернет.");
+                mainHandler.post(() -> {
+                    if (progress != null) progress.hide();
+                    tvContent.setText("Не удалось получить объяснение. Проверьте интернет или лимиты API.");
                 });
             }
         });
@@ -130,6 +134,7 @@ public class AnswerDetailAdapter extends RecyclerView.Adapter<AnswerDetailAdapte
         final TextView tvQuestion;
         final TextView tvYour;
         final TextView tvCorrect;
+        final MaterialButton btnExplain;
 
         VH(@NonNull View itemView) {
             super(itemView);
@@ -139,6 +144,7 @@ public class AnswerDetailAdapter extends RecyclerView.Adapter<AnswerDetailAdapte
             tvQuestion = itemView.findViewById(R.id.tvQuestion);
             tvYour = itemView.findViewById(R.id.tvYour);
             tvCorrect = itemView.findViewById(R.id.tvCorrect);
+            btnExplain = itemView.findViewById(R.id.btnExplain);
         }
     }
 }

@@ -10,7 +10,7 @@
         android:id="@+id/cardScore"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
-        app:cardCornerRadius="16dp"
+        app:cardCornerRadius="24dp"
         app:cardElevation="2dp"
         app:cardBackgroundColor="@color/option_bg"
         app:layout_constraintStart_toStartOf="parent"
@@ -58,7 +58,7 @@
         android:id="@+id/cardTimer"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
-        app:cardCornerRadius="16dp"
+        app:cardCornerRadius="24dp"
         app:cardElevation="2dp"
         app:cardBackgroundColor="@color/option_bg"
         app:layout_constraintEnd_toEndOf="parent"
@@ -133,7 +133,7 @@
             android:textAllCaps="false"
             android:textColor="@color/border_dark"
             android:textSize="16sp"
-            app:cornerRadius="20dp"
+            app:cornerRadius="36dp"
             app:strokeColor="@color/track_gray"
             app:strokeWidth="1dp" />
 
@@ -147,7 +147,7 @@
             android:textAllCaps="false"
             android:textColor="@color/border_dark"
             android:textSize="16sp"
-            app:cornerRadius="20dp"
+            app:cornerRadius="36dp"
             app:strokeColor="@color/track_gray"
             app:strokeWidth="1dp" />
 
@@ -161,7 +161,7 @@
             android:textAllCaps="false"
             android:textColor="@color/border_dark"
             android:textSize="16sp"
-            app:cornerRadius="20dp"
+            app:cornerRadius="36dp"
             app:strokeColor="@color/track_gray"
             app:strokeWidth="1dp" />
 
@@ -175,7 +175,7 @@
             android:textAllCaps="false"
             android:textColor="@color/border_dark"
             android:textSize="16sp"
-            app:cornerRadius="20dp"
+            app:cornerRadius="36dp"
             app:strokeColor="@color/track_gray"
             app:strokeWidth="1dp" />
 

@@ -29,12 +29,15 @@
             android:textStyle="bold" />
     </LinearLayout>
 
-    <ProgressBar
+    <com.google.android.material.progressindicator.CircularProgressIndicator
         android:id="@+id/progressExplanation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_margin="16dp" />
+        android:layout_margin="16dp"
+        android:indeterminate="true"
+        app:indicatorColor="@color/brand_purple"
+        app:trackThickness="4dp" />
 
     <TextView
         android:id="@+id/tvExplanationContent"
@@ -55,19 +58,21 @@
             android:id="@+id/btnSave"
             style="@style/Widget.Material3.Button.TonalButton"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="56dp"
             android:layout_weight="1"
             android:text="Сохранить"
+            android:layout_marginEnd="8dp"
+            app:cornerRadius="28dp"
             app:icon="@android:drawable/btn_star_big_off" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnDismiss"
             style="@style/Widget.Material3.Button.UnelevatedButton"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="56dp"
             android:layout_weight="1"
             android:text="Понятно"
-            app:cornerRadius="12dp" />
+            app:cornerRadius="28dp" />
     </LinearLayout>
 
 </LinearLayout>

@@ -37,7 +37,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="16dp"
+                app:cardCornerRadius="32dp"
                 app:cardElevation="2dp"
                 app:strokeWidth="0dp">
 
@@ -86,31 +86,34 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <Button
+                        <com.google.android.material.button.MaterialButton
                             android:id="@+id/btnThemeDefault"
                             style="@style/Widget.Material3.Button.TonalButton"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="Дефолт"
+                            app:cornerRadius="24dp"
                             android:layout_marginEnd="4dp"/>
 
-                        <Button
+                        <com.google.android.material.button.MaterialButton
                             android:id="@+id/btnThemeNeon"
                             style="@style/Widget.Material3.Button.TonalButton"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="Неон"
+                            app:cornerRadius="24dp"
                             android:layout_marginEnd="4dp"/>
 
-                        <Button
+                        <com.google.android.material.button.MaterialButton
                             android:id="@+id/btnThemeOcean"
                             style="@style/Widget.Material3.Button.TonalButton"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Океан"/>
+                            android:text="Океан"
+                            app:cornerRadius="24dp"/>
                     </LinearLayout>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -127,7 +130,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="16dp"
+                app:cardCornerRadius="32dp"
                 app:cardElevation="2dp"
                 app:strokeWidth="0dp">
 
