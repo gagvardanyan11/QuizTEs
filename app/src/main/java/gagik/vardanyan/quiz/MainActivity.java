@@ -54,10 +54,10 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    `
 
-        `
-        .ThemeManager.applyTheme(this);
+
+
+        ThemeManager.applyTheme(this);
 
         SharedPreferences prefs = getSharedPreferences("app_prefs", MODE_PRIVATE);
         boolean isDark = prefs.getBoolean("dark_mode", false);
