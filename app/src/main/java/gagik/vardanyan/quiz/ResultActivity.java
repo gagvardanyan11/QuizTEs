@@ -66,12 +66,7 @@ public class ResultActivity extends AppCompatActivity {
         }).start();
 
         // Progression: Earn XP (100 base + 50 per correct answer)
-        boolean isDaily = getIntent().getBooleanExtra("isDaily", false);
         int xpEarned = 100 + (correct * 50);
-        if (isDaily) {
-            xpEarned *= 2;
-            android.widget.Toast.makeText(this, "Вызов дня! Получено двойной опыт: " + xpEarned + " XP!", android.widget.Toast.LENGTH_SHORT).show();
-        }
 
         ProgressionManager.Progress oldProg = ProgressionManager.getProgress(this);
         ProgressionManager.addXp(this, xpEarned);
@@ -87,10 +82,6 @@ public class ResultActivity extends AppCompatActivity {
             android.widget.Toast.makeText(this, "Уровень повышен! Теперь ты " + newProg.level + " уровня!", android.widget.Toast.LENGTH_LONG).show();
         }
 
-        // Quest progression
-        QuestManager.updateProgress(this, "q1", correct);
-        QuestManager.updateProgress(this, "q2", 1);
-        if (accuracy == 100) QuestManager.updateProgress(this, "q3", 1);
 
         rvDetails.setLayoutManager(new LinearLayoutManager(this));
         rvDetails.setAdapter(new AnswerDetailAdapter(details));

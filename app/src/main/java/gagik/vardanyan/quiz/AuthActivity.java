@@ -20,6 +20,9 @@ import androidx.credentials.GetCredentialResponse;
 import androidx.credentials.exceptions.GetCredentialException;
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption;
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.GoogleAuthProvider;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -121,20 +124,29 @@ public class AuthActivity extends AppCompatActivity {
             String idToken = googleIdTokenCredential.getIdToken();
             String displayName = googleIdTokenCredential.getDisplayName();
 
-            // Use displayName or email as username
-            String username = displayName != null ? displayName : "Google User";
+            // Firebase Auth
+            AuthCredential firebaseCredential = GoogleAuthProvider.getCredential(idToken, null);
+            FirebaseAuth.getInstance().signInWithCredential(firebaseCredential)
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        // Use displayName or email as username
+                        String username = displayName != null ? displayName : "Google User";
 
-            executor.execute(() -> {
-                AppDatabase db = AppDatabase.getInstance(this);
-                User existing = db.userDao().getUserByUsername(username);
-                if (existing == null) {
-                    User newUser = new User(username, "google_auth", R.drawable.ic_avatar_1);
-                    db.userDao().registerUser(newUser);
-                    existing = db.userDao().login(username, "google_auth");
-                }
-                final User finalUser = existing;
-                runOnUiThread(() -> saveSession(finalUser));
-            });
+                        executor.execute(() -> {
+                            AppDatabase db = AppDatabase.getInstance(this);
+                            User existing = db.userDao().getUserByUsername(username);
+                            if (existing == null) {
+                                User newUser = new User(username, "google_auth", R.drawable.ic_avatar_1);
+                                db.userDao().registerUser(newUser);
+                                existing = db.userDao().login(username, "google_auth");
+                            }
+                            final User finalUser = existing;
+                            runOnUiThread(() -> saveSession(finalUser));
+                        });
+                    } else {
+                        Toast.makeText(AuthActivity.this, "Ошибка Firebase: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
         }
     }
 

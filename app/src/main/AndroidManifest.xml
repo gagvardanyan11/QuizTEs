@@ -33,7 +33,6 @@
         <activity android:name=".SettingsActivity" />
         <activity android:name=".LobbyActivity" />
         <activity android:name=".ProfileActivity" />
-        <activity android:name=".KnowledgeBaseActivity" />
         <activity android:name=".LeaderboardActivity" />
     </application>
 

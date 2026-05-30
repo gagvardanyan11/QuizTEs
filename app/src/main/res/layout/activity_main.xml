@@ -36,8 +36,9 @@
                         android:id="@+id/ivAvatar"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:src="@drawable/ic_avatar_1"
-                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_quiz_main"
+                        android:padding="8dp"
+                        android:scaleType="centerInside"
                         android:clickable="true"
                         android:focusable="true"
                         android:background="?attr/selectableItemBackground"/>
@@ -51,7 +52,7 @@
                     android:layout_marginEnd="8dp"
                     android:orientation="vertical"
                     app:layout_constraintStart_toEndOf="@id/cardAvatar"
-                    app:layout_constraintEnd_toStartOf="@+id/btnKnowledge"
+                    app:layout_constraintEnd_toStartOf="@+id/btnSettings"
                     app:layout_constraintTop_toTopOf="@id/cardAvatar"
                     app:layout_constraintBottom_toBottomOf="@id/cardAvatar">
 
@@ -90,18 +91,6 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
-                    android:id="@+id/btnKnowledge"
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:padding="6dp"
-                    android:src="@android:drawable/ic_menu_agenda"
-                    app:tint="@color/muted_gray"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    app:layout_constraintEnd_toStartOf="@id/btnSettings"
-                    app:layout_constraintTop_toTopOf="parent" />
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cardProgression"
@@ -198,71 +187,6 @@
                 </com.google.android.material.button.MaterialButtonToggleGroup>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- AI Advisor Insights -->
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cardAdvisor"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:visibility="gone"
-                app:cardCornerRadius="32dp"
-                app:cardElevation="2dp"
-                app:strokeWidth="1dp"
-                app:strokeColor="@color/brand_purple"
-                app:layout_constraintTop_toBottomOf="@+id/cardToggle">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="16dp"
-                    android:gravity="center_vertical">
-
-                    <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:src="@drawable/ic_ai_stars"
-                        app:tint="@color/brand_purple" />
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_marginStart="16dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="СОВЕТ ОТ AI"
-                            android:textColor="@color/brand_purple"
-                            android:textSize="10sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/tvAdvisorInsight"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:text="..."
-                            android:textColor="@color/border_dark"
-                            android:textSize="13sp"
-                            android:fontStyle="italic" />
-                    </LinearLayout>
-
-                    <ImageView
-                        android:id="@+id/btnRefreshAdvisor"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:padding="6dp"
-                        android:src="@android:drawable/ic_popup_sync"
-                        app:tint="@color/muted_gray"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:background="?attr/selectableItemBackgroundBorderless"/>
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
             <!-- Input Field -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardTopic"
@@ -272,7 +196,7 @@
                 app:cardCornerRadius="36dp"
                 app:cardElevation="4dp"
                 app:strokeWidth="0dp"
-                app:layout_constraintTop_toBottomOf="@+id/cardAdvisor">
+                app:layout_constraintTop_toBottomOf="@+id/cardToggle">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tilTopic"
@@ -282,7 +206,7 @@
                     app:boxBackgroundMode="none"
                     app:hintEnabled="false"
                     app:endIconMode="custom"
-                    app:endIconDrawable="@android:drawable/ic_btn_speak_now"
+                    app:endIconDrawable="@drawable/ic_rocket"
                     app:endIconTint="@color/brand_purple">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -300,37 +224,6 @@
                 </com.google.android.material.textfield.TextInputLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Trending Topics Selection -->
-            <TextView
-                android:id="@+id/tvTrendingLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="В ТРЕНДЕ"
-                android:textColor="@color/muted_gray"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardTopic" />
-
-            <HorizontalScrollView
-                android:id="@+id/scrollTrending"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:scrollbars="none"
-                app:layout_constraintTop_toBottomOf="@+id/tvTrendingLabel">
-
-                <LinearLayout
-                    android:id="@+id/llTrendingContainer"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingBottom="4dp">
-                    <!-- Dynamic trending chips go here -->
-                </LinearLayout>
-            </HorizontalScrollView>
-
             <!-- Difficulty Selection -->
             <TextView
                 android:id="@+id/tvDiffLabel"
@@ -342,7 +235,7 @@
                 android:textSize="12sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/scrollTrending" />
+                app:layout_constraintTop_toBottomOf="@+id/cardTopic" />
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardDiff"
@@ -477,69 +370,6 @@
                 </com.google.android.material.card.MaterialCardView>
 
             </GridLayout>
-
-            <!-- Daily Challenge Card (Moved to bottom) -->
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cardDaily"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="24dp"
-                app:cardCornerRadius="32dp"
-                app:cardElevation="4dp"
-                app:strokeWidth="1dp"
-                app:strokeColor="@color/brand_blue"
-                app:layout_constraintTop_toBottomOf="@+id/categoryGrid"
-                app:layout_constraintBottom_toBottomOf="parent">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bg_gradient_daily"
-                    android:orientation="horizontal"
-                    android:padding="16dp"
-                    android:gravity="center_vertical">
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="ВЫЗОВ ДНЯ"
-                            android:textColor="#FFFFFF"
-                            android:textSize="10sp"
-                            android:textStyle="bold"
-                            android:alpha="0.9" />
-
-                        <TextView
-                            android:id="@+id/tvDailyTopic"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:text="Загрузка..."
-                            android:textColor="#FFFFFF"
-                            android:textSize="18sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Награда: x2 Опыт 💎"
-                            android:textColor="#FFFFFF"
-                            android:textSize="11sp" />
-                    </LinearLayout>
-
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:src="@drawable/ic_daily_star"
-                        app:tint="#FFFFFF" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

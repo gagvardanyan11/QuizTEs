@@ -35,7 +35,7 @@
     <string name="auth_google">GOOGLE</string>
     <string name="auth_email">EMAIL</string>
     <string name="auth_guest">ГОСТЬ</string>
-    <string name="auth_footer">ВСТУПАЯ В ИГРУ, ТЫ ПРИНИМАЕШЬ ВЫЗОВ\nAI</string>
+    <string name="auth_footer">ВСТУПАЯ В ИГРУ, ТЫ ПРИНИМАЕШЬ ВЫЗОВ</string>
 
     <string name="auth_username_hint">Имя пользователя</string>
     <string name="auth_password_hint">Пароль</string>

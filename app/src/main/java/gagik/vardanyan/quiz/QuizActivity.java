@@ -124,50 +124,12 @@ public class QuizActivity extends AppCompatActivity {
             optionButtons[i].setOnClickListener(v -> onAnswer(choice));
         }
 
-        findViewById(R.id.btnHint).setOnClickListener(v -> showHint());
-
         showQuestion();
     }
 
-    private void showHint() {
-        if (locked) return;
-        
-        MaterialButton btnHint = findViewById(R.id.btnHint);
-        btnHint.setEnabled(false);
-        btnHint.setText("Ищу подсказку...");
-
-        new Thread(() -> {
-            try {
-                String apiKey = AiQuizService.getApiKey(this);
-                Question q = questions.get(index);
-                String optionsStr = String.join(", ", q.getOptions());
-                String hint = AiQuizService.getHint(apiKey, q.getText(), optionsStr);
-
-                runOnUiThread(() -> {
-                    new AlertDialog.Builder(this)
-                            .setTitle("Подсказка от ИИ 💡")
-                            .setMessage(hint)
-                            .setPositiveButton("Понятно", null)
-                            .setOnDismissListener(d -> {
-                                btnHint.setText("Подсказка использована");
-                                // We keep it disabled or maybe charge XP/points later
-                            })
-                            .show();
-                });
-            } catch (Exception e) {
-                runOnUiThread(() -> {
-                    btnHint.setEnabled(true);
-                    btnHint.setText("Нужна подсказка? 💡");
-                    Toast.makeText(this, "Ошибка связи с ИИ", Toast.LENGTH_SHORT).show();
-                });
-            }
-        }).start();
-    }
 
     private void showQuestion() {
         locked = false;
-        findViewById(R.id.btnHint).setEnabled(true);
-        ((MaterialButton)findViewById(R.id.btnHint)).setText("Нужна подсказка? 💡");
 
         Question q = questions.get(index);
         questionStartTime = System.currentTimeMillis();

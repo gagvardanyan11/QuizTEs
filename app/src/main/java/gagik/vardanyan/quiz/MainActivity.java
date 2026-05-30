@@ -41,24 +41,15 @@ public class MainActivity extends AppCompatActivity {
     private MaterialButton btnMulti;
     private MaterialButton btnEasy, btnMedium, btnHard;
     private CircularProgressIndicator progressAi;
-    private TextView tvLevel, tvStreak, tvDailyTopic, tvTitle, tvAdvisorInsight;
-    private View cardDaily, cardAdvisor;
-    private LinearLayout llTrendingContainer;
+    private TextView tvLevel, tvStreak, tvTitle;
     private ImageView ivAvatar;
     private com.google.android.material.progressindicator.LinearProgressIndicator pbExperience;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
-
-    private final String[] DAILY_TOPICS = {
-            "История Древнего Рима", "Великие открытия", "Мировая кухня",
-            "Космические миссии", "Классическая музыка", "Мифология",
-            "Чудеса света", "Животные океана", "Кино 90-х"
-    };
 
     private static final int SPEECH_REQUEST_CODE = 101;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // Apply theme from settings before super.onCreate
         ThemeManager.applyTheme(this);
 
         SharedPreferences prefs = getSharedPreferences("app_prefs", MODE_PRIVATE);
@@ -82,16 +73,8 @@ public class MainActivity extends AppCompatActivity {
         progressAi = findViewById(R.id.progressAi);
         tvLevel = findViewById(R.id.tvLevel);
         tvStreak = findViewById(R.id.tvStreak);
+        tvTitle = findViewById(R.id.tvTitle);
         pbExperience = findViewById(R.id.pbExperience);
-        cardDaily = findViewById(R.id.cardDaily);
-        tvDailyTopic = findViewById(R.id.tvDailyTopic);
-        cardAdvisor = findViewById(R.id.cardAdvisor);
-        tvAdvisorInsight = findViewById(R.id.tvAdvisorInsight);
-        llTrendingContainer = findViewById(R.id.llTrendingContainer);
-
-        setupDailyChallenge();
-        setupAiAdvisor();
-        loadTrendingTopics();
 
         findViewById(R.id.cardProgression).setOnClickListener(v -> {
             showProgressionMenu();
@@ -101,19 +84,11 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(this, SettingsActivity.class));
         });
 
-        findViewById(R.id.btnKnowledge).setOnClickListener(v -> {
-            startActivity(new Intent(this, KnowledgeBaseActivity.class));
-        });
-
-        findViewById(R.id.cardDaily).setOnLongClickListener(v -> {
-            showQuestsDialog();
-            return true;
-        });
-
         com.google.android.material.textfield.TextInputLayout til = findViewById(R.id.tilTopic);
         til.setEndIconOnClickListener(v -> startSpeechToText());
 
-        findViewById(R.id.ivAvatar).setOnClickListener(v -> {
+        ivAvatar = findViewById(R.id.ivAvatar);
+        ivAvatar.setOnClickListener(v -> {
             startActivity(new Intent(this, ProfileActivity.class));
         });
         
@@ -179,7 +154,6 @@ public class MainActivity extends AppCompatActivity {
         setLoading(true);
         executor.execute(() -> {
             try {
-                // 1. Проверяем кэш в базе
                 CachedQuiz cached = AppDatabase.getInstance(this).quizDao().getCachedQuiz(topic);
 
                 if (cached != null) {
@@ -195,10 +169,8 @@ public class MainActivity extends AppCompatActivity {
                     throw new Exception("API ключ не задан. Перейдите в настройки.");
                 }
                 
-                // Note: Updated generateQuizJson signature
                 String quizJson = AiQuizService.generateQuizJson(apiKey, topic, questionCount, diff, timeSec, style);
 
-                // 2. Сохраняем в кэш
                 AppDatabase.getInstance(this).quizDao().insertCachedQuiz(
                         new CachedQuiz(topic, quizJson, System.currentTimeMillis())
                 );
@@ -222,162 +194,22 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void loadTrendingTopics() {
-        executor.execute(() -> {
-            try {
-                String apiKey = AiQuizService.getApiKey(this);
-                String topics = AiQuizService.getTrendingTopics(apiKey);
-                String[] split = topics.split(",");
-                
-                runOnUiThread(() -> {
-                    llTrendingContainer.removeAllViews();
-                    for (String t : split) {
-                        String topic = t.trim();
-                        if (topic.isEmpty()) continue;
-                        
-                        com.google.android.material.chip.Chip chip = new com.google.android.material.chip.Chip(this);
-                        chip.setText(topic);
-                        chip.setChipIconResource(android.R.drawable.ic_menu_search);
-                        chip.setOnClickListener(v -> etTopic.setText(topic));
-                        
-                        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-                                LinearLayout.LayoutParams.WRAP_CONTENT,
-                                LinearLayout.LayoutParams.WRAP_CONTENT
-                        );
-                        lp.setMarginEnd(12);
-                        llTrendingContainer.addView(chip, lp);
-                    }
-                });
-            } catch (Exception ignored) {}
-        });
-    }
-
-    private void setupAiAdvisor() {
-        cardAdvisor.setVisibility(View.VISIBLE);
-        refreshAdvisorInsight();
-        findViewById(R.id.btnRefreshAdvisor).setOnClickListener(v -> refreshAdvisorInsight());
-    }
-
-    private void refreshAdvisorInsight() {
-        tvAdvisorInsight.setText("AI анализирует ваши успехи...");
-        executor.execute(() -> {
-            try {
-                AiQuizService aiService = new AiQuizService();
-                ProgressionManager.Progress progress = ProgressionManager.getProgress(this);
-                String tip = aiService.getQuickTip(progress.level, progress.maxStreak);
-                runOnUiThread(() -> tvAdvisorInsight.setText(tip));
-            } catch (Exception e) {
-                runOnUiThread(() -> tvAdvisorInsight.setText("Знание — сила! Продолжайте учиться."));
-            }
-        });
-    }
-
     private void showProgressionMenu() {
-        String[] options = {"Статистика и отчет ИИ", "Глобальный рейтинг", "Ежедневные задания"};
+        String[] options = {"Статистика и отчет ИИ", "Глобальный рейтинг"};
         new AlertDialog.Builder(this)
                 .setTitle("Прогресс")
                 .setItems(options, (dialog, which) -> {
                     if (which == 0) startActivity(new Intent(this, StatisticsActivity.class));
                     else if (which == 1) startActivity(new Intent(this, LeaderboardActivity.class));
-                    else if (which == 2) showQuestsDialog();
                 })
                 .show();
     }
 
-    private void showQuestsDialog() {
-        View dialogView = getLayoutInflater().inflate(R.layout.dialog_quests, null);
-        AlertDialog dialog = new AlertDialog.Builder(this)
-                .setView(dialogView)
-                .create();
-
-        LinearLayout container = dialogView.findViewById(R.id.llQuestsContainer);
-        List<QuestManager.Quest> quests = QuestManager.getDailyQuests(this);
-
-        for (QuestManager.Quest q : quests) {
-            View itemView = getLayoutInflater().inflate(R.layout.item_quest, container, false);
-            ((TextView) itemView.findViewById(R.id.tvQuestTitle)).setText(q.title);
-            ((TextView) itemView.findViewById(R.id.tvQuestReward)).setText("+" + q.rewardXp + " XP");
-            
-            com.google.android.material.progressindicator.LinearProgressIndicator pb = itemView.findViewById(R.id.pbQuest);
-            pb.setMax(q.goal);
-            pb.setProgress(q.progress);
-
-            Button btnClaim = itemView.findViewById(R.id.btnClaim);
-            ImageView ivCheck = itemView.findViewById(R.id.ivCheck);
-
-            if (q.rewardClaimed) {
-                ivCheck.setVisibility(View.VISIBLE);
-                btnClaim.setVisibility(View.GONE);
-            } else if (q.completed) {
-                btnClaim.setVisibility(View.VISIBLE);
-                ivCheck.setVisibility(View.GONE);
-                btnClaim.setOnClickListener(v -> {
-                    QuestManager.claimReward(this, q);
-                    updateProgressUI();
-                    dialog.dismiss();
-                    showQuestsDialog();
-                });
-            }
-
-            container.addView(itemView);
-        }
-
-        dialogView.findViewById(R.id.btnCloseQuests).setOnClickListener(v -> dialog.dismiss());
-        dialog.show();
-    }
-
-    private void setupDailyChallenge() {
-        // Выбираем тему на основе дня
-        long dayIndex = System.currentTimeMillis() / (1000 * 60 * 60 * 24);
-        String dailyTopic = DAILY_TOPICS[(int) (dayIndex % DAILY_TOPICS.length)];
-        tvDailyTopic.setText(dailyTopic);
-
-        cardDaily.setOnClickListener(v -> {
-            startDailyQuiz(dailyTopic);
-        });
-    }
-
-    private void startDailyQuiz(String topic) {
-        String apiKey = AiQuizService.getApiKey(this);
-        setLoading(true);
-
-        executor.execute(() -> {
-            try {
-                // Для ежедневного вызова всегда пытаемся получить свежий квиз или из кэша
-                CachedQuiz cached = AppDatabase.getInstance(this).quizDao().getCachedQuiz("DAILY_" + topic);
-                String json;
-                if (cached != null) {
-                    json = cached.jsonContent;
-                } else {
-                    json = AiQuizService.generateQuizJson(apiKey, topic, 10, 1, 15, null); // 10 вопросов, средний уровень
-                    AppDatabase.getInstance(this).quizDao().insertCachedQuiz(new CachedQuiz("DAILY_" + topic, json, System.currentTimeMillis()));
-                }
-
-                runOnUiThread(() -> {
-                    setLoading(false);
-                    Intent i = new Intent(this, QuizActivity.class);
-                    i.putExtra(QuizActivity.EXTRA_SET_TITLE, topic);
-                    i.putExtra(QuizActivity.EXTRA_NUM_QUESTIONS, 10);
-                    i.putExtra(QuizActivity.EXTRA_TIMER_ENABLED, true);
-                    i.putExtra(QuizActivity.EXTRA_TIME_SEC, 15);
-                    i.putExtra(QuizActivity.EXTRA_QUESTIONS_JSON, json);
-                    i.putExtra("isDaily", true);
-                    startActivity(i);
-                });
-            } catch (Exception e) {
-                runOnUiThread(() -> {
-                    setLoading(false);
-                    Toast.makeText(this, "Не удалось загрузить вызов дня", Toast.LENGTH_SHORT).show();
-                });
-            }
-        });
-    }
 
     private void refreshCategories() {
         android.widget.GridLayout group = findViewById(R.id.categoryGrid);
         if (group == null) return;
 
-        // Clear existing categories (keep chipAdd)
         for (int i = group.getChildCount() - 1; i >= 0; i--) {
             View child = group.getChildAt(i);
             if (child.getId() != R.id.chipAdd) group.removeViewAt(i);
@@ -386,7 +218,6 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences("app_prefs", MODE_PRIVATE);
         Set<String> deleted = prefs.getStringSet("deleted_cats", new HashSet<>());
 
-        // Default Categories
         addDefaultCategory("Космос", "#3B82F6", R.drawable.ic_rocket, deleted);
         addDefaultCategory("Java", "#F97316", R.drawable.ic_code, deleted);
         addDefaultCategory("Технологии", "#8B5CF6", R.drawable.ic_laptop, deleted);
@@ -444,6 +275,15 @@ public class MainActivity extends AppCompatActivity {
         refreshAdvisorInsight();
     }
 
+    private void refreshAdvisorInsight() {
+        TextView tvSubtitle = findViewById(R.id.tvSubtitle);
+        if (tvSubtitle == null) return;
+
+        ProgressionManager.Progress progress = ProgressionManager.getProgress(this);
+        String tip = new AiQuizService().getQuickTip(progress.level, progress.maxStreak);
+        tvSubtitle.setText(tip);
+    }
+
     private void updateProgressUI() {
         SharedPreferences prefs = getSharedPreferences("app_prefs", MODE_PRIVATE);
         String name = prefs.getString("user_name", "QuizMaster");
@@ -451,7 +291,6 @@ public class MainActivity extends AppCompatActivity {
         
         if (tvTitle != null) tvTitle.setText(name);
         
-        ImageView ivAvatar = findViewById(R.id.ivAvatar);
         if (ivAvatar != null) {
             ivAvatar.setImageResource(avatarRes);
         }
@@ -485,7 +324,6 @@ public class MainActivity extends AppCompatActivity {
                     executor.execute(() -> {
                         try {
                             String styleJson = AiQuizService.suggestCategoryStyle(apiKey, name);
-                            // If Gemini returns markdown-wrapped JSON, clean it
                             if (styleJson.contains("```")) {
                                 styleJson = styleJson.replaceAll("(?s)```(?:json)?\\s*(.*?)\\s*```", "$1").trim();
                             }
@@ -498,7 +336,6 @@ public class MainActivity extends AppCompatActivity {
                                 try {
                                     int color = Color.parseColor(colorHex);
                                     
-                                    // Умный поиск ресурса иконки
                                     String cleanedIcon = iconName.replace(".xml", "").replace("ic_", "");
                                     int iconRes = getResources().getIdentifier("ic_" + cleanedIcon, "drawable", getPackageName());
                                     if (iconRes == 0) iconRes = R.drawable.ic_book;
@@ -659,7 +496,6 @@ public class MainActivity extends AppCompatActivity {
         String raw = e == null ? "Unknown" : String.valueOf(e.getMessage());
         String lower = raw.toLowerCase();
         
-        // Если это HTTP ошибка, покажем её код
         if (raw.contains("HTTP")) return raw;
         
         if (lower.contains("429") || lower.contains("quota")) return "Gemini: квота исчерпана (429).";

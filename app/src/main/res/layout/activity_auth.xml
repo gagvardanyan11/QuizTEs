@@ -37,7 +37,7 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/ic_book"
+                    android:src="@drawable/ic_quiz_main"
                     app:tint="@color/white"
                     android:contentDescription="@null" />
             </FrameLayout>
@@ -47,16 +47,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/auth_title_main"
                     android:textColor="@color/border_dark"
-                    android:textSize="26sp"
+                    android:textSize="28sp"
                     android:textStyle="bold"
                     android:fontFamily="sans-serif-black" />
-
             </LinearLayout>
 
             <!-- Google Button -->
@@ -124,6 +124,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/auth_username_hint"
+                    app:startIconDrawable="@drawable/ic_user"
+                    app:startIconTint="@color/muted_gray"
                     app:boxCornerRadiusBottomEnd="28dp"
                     app:boxCornerRadiusBottomStart="28dp"
                     app:boxCornerRadiusTopEnd="28dp"
@@ -140,6 +142,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:hint="@string/auth_password_hint"
+                    app:startIconDrawable="@drawable/ic_lock"
+                    app:startIconTint="@color/muted_gray"
                     app:passwordToggleEnabled="true"
                     app:boxCornerRadiusBottomEnd="28dp"
                     app:boxCornerRadiusBottomStart="28dp"
@@ -158,6 +162,7 @@
                     android:layout_height="56dp"
                     android:layout_marginTop="16dp"
                     android:text="@string/auth_btn_login"
+                    app:backgroundTint="@color/brand_purple"
                     app:cornerRadius="28dp" />
 
                 <TextView
