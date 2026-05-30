@@ -1,0 +1,8 @@
+[
+  {"question":"Для чего используется ViewModel (Jetpack)?","options":["Рисует UI","Хранит данные UI и переживает повороты","Собирает APK","Работает только с сетью"],"correctIndex":1,"timeLimitSec":12},
+  {"question":"Что такое ANR?","options":["Ошибка компиляции","Application Not Responding","Неверный ресурс","Android New Release"],"correctIndex":1,"timeLimitSec":12},
+  {"question":"Что делает WorkManager?","options":["Запускает фоновые задачи с гарантией выполнения","Рисует графики","Меняет тему","Шифрует файлы"],"correctIndex":0,"timeLimitSec":12},
+  {"question":"Зачем нужен Proguard/R8?","options":["Для UI","Для минификации/обфускации и оптимизации","Для базы данных","Для GPS"],"correctIndex":1,"timeLimitSec":12},
+  {"question":"Что такое deep link?","options":["Ссылка, открывающая конкретный экран в приложении","Сжатие изображений","Проверка сети","Скрытый сервис"],"correctIndex":0,"timeLimitSec":12}
+]
+

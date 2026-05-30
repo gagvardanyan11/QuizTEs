@@ -1,0 +1,8 @@
+[
+  {"question":"Какая коллекция не хранит дубликаты?","options":["ArrayList","LinkedList","HashSet","Vector"],"correctIndex":2,"timeLimitSec":10},
+  {"question":"Что вернёт выражение: \"a\".equals(\"a\")?","options":["true","false","0","ошибка"],"correctIndex":0,"timeLimitSec":10},
+  {"question":"Что такое autoboxing?","options":["Авто-компиляция","Преобразование примитива в объект-обёртку","Шифрование","Сжатие памяти"],"correctIndex":1,"timeLimitSec":10},
+  {"question":"Как объявить константу?","options":["final int X=1;","const int X=1;","static int X=1;","immutable int X=1;"],"correctIndex":0,"timeLimitSec":10},
+  {"question":"Какой модификатор делает метод доступным только внутри класса?","options":["public","protected","private","package"],"correctIndex":2,"timeLimitSec":10}
+]
+

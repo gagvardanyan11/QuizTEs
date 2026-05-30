@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Основные цвета для "белого" чистого стиля -->
+    <color name="auth_bg_main">#6366F1</color>
+    <color name="auth_btn_google_border">#E2E8F0</color>
+    <color name="auth_btn_email">#3B82F6</color>
+    <color name="auth_btn_guest">#F43F5E</color>
+    <color name="auth_text_footer">#94A3B8</color>
+    <color name="brand_purple">#6366F1</color> <!-- Indigo accent -->
+
+    <color name="brand_blue">#3B82F6</color>
+
+    <color name="gray_bg">#F8FAFC</color> <!-- Очень светлый фон -->
+    <color name="option_bg">#FFFFFF</color> <!-- Белые карточки -->
+
+    <color name="correct_bg">#22C55E</color> <!-- Чистый зеленый -->
+    <color name="wrong_bg">#EF4444</color>   <!-- Чистый красный -->
+
+    <color name="border_dark">#1E293B</color> <!-- Основной текст (Slate 800) -->
+    <color name="muted_gray">#64748B</color>   <!-- Вторичный текст (Slate 500) -->
+    <color name="track_gray">#E2E8F0</color>   <!-- Линии и границы (Slate 200) -->
+
+    <!-- Дополнительные оттенки для состояний -->
+    <color name="correct_light">#DCFCE7</color>
+    <color name="wrong_light">#FEE2E2</color>
+
+    <!-- Difficulty Colors -->
+    <color name="difficulty_easy">#4CAF50</color>
+    <color name="difficulty_medium">#FF9800</color>
+    <color name="difficulty_hard">#F44336</color>
+
+    <!-- Theme Presets -->
+    <!-- Neon Theme -->
+    <color name="neon_purple">#BC13FE</color>
+    <color name="neon_pink">#FF00E0</color>
+    <color name="neon_dark">#0D0D0D</color>
+    <!-- Ocean Theme -->
+    <color name="ocean_blue">#0077BE</color>
+    <color name="ocean_cyan">#00E5FF</color>
+    <color name="ocean_bg">#002B36</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+</resources>

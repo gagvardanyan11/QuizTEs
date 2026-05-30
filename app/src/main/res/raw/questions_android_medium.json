@@ -1,0 +1,8 @@
+[
+  {"question":"Какой метод Activity вызывается при первом создании?","options":["onStart()","onCreate()","onResume()","onDestroy()"],"correctIndex":1,"timeLimitSec":10},
+  {"question":"Что делает RecyclerView?","options":["Проигрывает музыку","Показывает большие списки эффективно","Сканирует QR","Управляет сетью"],"correctIndex":1,"timeLimitSec":10},
+  {"question":"Как получить View по id в Activity?","options":["findViewById(...)","getView(...)","loadView(...)","view(...)"],"correctIndex":0,"timeLimitSec":10},
+  {"question":"Где обычно хранить строки?","options":["res/values/strings.xml","res/raw","assets","AndroidManifest.xml"],"correctIndex":0,"timeLimitSec":10},
+  {"question":"Что такое dp?","options":["Пиксели экрана","Независимые от плотности пиксели","Проценты ширины","Единицы памяти"],"correctIndex":1,"timeLimitSec":10}
+]
+

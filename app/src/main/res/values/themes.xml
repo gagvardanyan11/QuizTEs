@@ -1,0 +1,25 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.Quiz" parent="Theme.Material3.Light.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    </style>
+
+    <style name="Theme.Quiz" parent="Base.Theme.Quiz" />
+
+    <style name="Theme.Quiz.Neon" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="colorPrimary">@color/neon_purple</item>
+        <item name="android:windowBackground">@color/neon_dark</item>
+        <item name="colorSurface">@color/neon_dark</item>
+        <item name="colorOnSurface">#FFFFFF</item>
+        <item name="colorSecondary">@color/neon_pink</item>
+    </style>
+
+    <style name="Theme.Quiz.Ocean" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="colorPrimary">@color/ocean_cyan</item>
+        <item name="android:windowBackground">@color/ocean_bg</item>
+        <item name="colorSurface">@color/ocean_bg</item>
+        <item name="colorOnSurface">#E0F7FA</item>
+        <item name="colorSecondary">@color/ocean_blue</item>
+    </style>
+</resources>

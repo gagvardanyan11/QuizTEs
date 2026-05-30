@@ -1,0 +1,51 @@
+<resources>
+    <string name="app_name">Quiz</string>
+
+    <string name="select_topic">Тема</string>
+    <string name="select_difficulty">Сложность</string>
+    <string-array name="topics">
+        <item>Java</item>
+        <item>Android</item>
+        <item>Космос</item>
+        <item>Коты</item>
+        <item>Кино</item>
+        <item>Еда</item>
+    </string-array>
+    <string-array name="difficulties">
+        <item>Лёгкая</item>
+        <item>Средняя</item>
+        <item>Сложная</item>
+    </string-array>
+
+    <string name="select_question_count">Количество вопросов</string>
+    <string name="timer_enabled">Таймер</string>
+    <string name="seconds_per_question">Секунд на вопрос</string>
+    <string-array name="question_counts">
+        <item>5</item>
+        <item>10</item>
+        <item>15</item>
+    </string-array>
+    <string-array name="time_limits">
+        <item>5</item>
+        <item>10</item>
+        <item>15</item>
+    </string-array>
+    <string name="auth_title_main">QUIZMASTER</string>
+    <string name="auth_title_ai">AI</string>
+    <string name="auth_google">GOOGLE</string>
+    <string name="auth_email">EMAIL</string>
+    <string name="auth_guest">ГОСТЬ</string>
+    <string name="auth_footer">ВСТУПАЯ В ИГРУ, ТЫ ПРИНИМАЕШЬ ВЫЗОВ\nAI</string>
+
+    <string name="auth_username_hint">Имя пользователя</string>
+    <string name="auth_password_hint">Пароль</string>
+    <string name="auth_btn_login">ВОЙТИ</string>
+    <string name="auth_btn_register">СОЗДАТЬ</string>
+    <string name="auth_no_account">Нет аккаунта? Регистрация</string>
+    <string name="auth_have_account">Уже есть аккаунт? Войти</string>
+    <string name="auth_err_fields">Заполните все поля</string>
+    <string name="auth_err_wrong">Неверное имя или пароль</string>
+    <string name="auth_err_exists">Пользователь уже существует</string>
+    <string name="auth_err_google">Ошибка входа Google: %s</string>
+    <string name="auth_err_token">Ошибка разбора токена</string>
+</resources>

@@ -1,0 +1,6 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Dark theme. -->
+    <style name="Base.Theme.Quiz" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="android:windowBackground">@color/gray_bg</item>
+    </style>
+</resources>

@@ -1,0 +1,33 @@
+[
+  {
+    "question": "Какой тип данных в Java хранит целые числа?",
+    "options": ["String", "int", "double", "boolean"],
+    "correctIndex": 1,
+    "timeLimitSec": 10
+  },
+  {
+    "question": "Какой оператор используется для сравнения равенства примитивов?",
+    "options": ["=", "==", "equals()", "!="],
+    "correctIndex": 1,
+    "timeLimitSec": 10
+  },
+  {
+    "question": "Какой метод является точкой входа в Java-программу?",
+    "options": ["start()", "run()", "main()", "init()"],
+    "correctIndex": 2,
+    "timeLimitSec": 10
+  },
+  {
+    "question": "Какая коллекция хранит уникальные элементы без дубликатов?",
+    "options": ["List", "Set", "Map", "Queue"],
+    "correctIndex": 1,
+    "timeLimitSec": 10
+  },
+  {
+    "question": "Как называется конструкция для обработки исключений?",
+    "options": ["try/catch", "if/else", "switch/case", "for/while"],
+    "correctIndex": 0,
+    "timeLimitSec": 10
+  }
+]
+

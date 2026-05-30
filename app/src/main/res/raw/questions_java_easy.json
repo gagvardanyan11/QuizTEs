@@ -1,0 +1,8 @@
+[
+  {"question":"Какой тип данных хранит целые числа?","options":["String","int","double","boolean"],"correctIndex":1,"timeLimitSec":10},
+  {"question":"Какой метод является точкой входа?","options":["start()","run()","main()","init()"],"correctIndex":2,"timeLimitSec":10},
+  {"question":"Как создать объект класса?","options":["new Class()","Class()","create Class","make Class"],"correctIndex":0,"timeLimitSec":10},
+  {"question":"Какой оператор сравнивает равенство примитивов?","options":["=","==","equals()","!="],"correctIndex":1,"timeLimitSec":10},
+  {"question":"Как называется цикл с проверкой условия перед телом?","options":["do-while","for-each","while","repeat"],"correctIndex":2,"timeLimitSec":10}
+]
+

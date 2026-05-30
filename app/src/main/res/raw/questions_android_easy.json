@@ -1,0 +1,8 @@
+[
+  {"question":"Как называется файл манифеста приложения?","options":["build.gradle","AndroidManifest.xml","settings.gradle","MainActivity.java"],"correctIndex":1,"timeLimitSec":10},
+  {"question":"Какой компонент отвечает за экран UI?","options":["Service","BroadcastReceiver","Activity","ContentProvider"],"correctIndex":2,"timeLimitSec":10},
+  {"question":"Где обычно лежат layout-файлы?","options":["res/layout","res/raw","assets","src/main/java"],"correctIndex":0,"timeLimitSec":10},
+  {"question":"Какой класс используется для перехода между Activity?","options":["Intent","Bundle","Thread","ViewModel"],"correctIndex":0,"timeLimitSec":10},
+  {"question":"Что такое APK?","options":["Архив ресурсов","Установочный пакет приложения","База данных","Виджет"],"correctIndex":1,"timeLimitSec":10}
+]
+

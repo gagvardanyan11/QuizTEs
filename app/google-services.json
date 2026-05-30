@@ -1,0 +1,105 @@
+{
+  "project_info": {
+    "project_number": "646338753457",
+    "project_id": "gen-lang-client-0304766873",
+    "storage_bucket": "gen-lang-client-0304766873.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:646338753457:android:b4913b3a8a3734fb58c390",
+        "android_client_info": {
+          "package_name": "gagik.vardanyan.finguidev4"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "646338753457-0a8m7ud749pjerujuj3ni4tdbrq83ljk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "gagik.vardanyan.finguidev4",
+            "certificate_hash": "9a74317abacfd3596c0d3ad550d9716f3a25f60f"
+          }
+        },
+        {
+          "client_id": "646338753457-n0l9te1ud5gnb3kbvujtk4bg4qvaqbb7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-8s4G0YlExDND8r5jvtUgBWfosbfNg1w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "646338753457-n0l9te1ud5gnb3kbvujtk4bg4qvaqbb7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:646338753457:android:86b102600e5fff3958c390",
+        "android_client_info": {
+          "package_name": "gagik.vardanyan.quiz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "646338753457-n0l9te1ud5gnb3kbvujtk4bg4qvaqbb7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-8s4G0YlExDND8r5jvtUgBWfosbfNg1w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "646338753457-n0l9te1ud5gnb3kbvujtk4bg4qvaqbb7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:646338753457:android:0c089eb64a98583158c390",
+        "android_client_info": {
+          "package_name": "gagik.vardanyan.quiz1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "646338753457-n0l9te1ud5gnb3kbvujtk4bg4qvaqbb7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-8s4G0YlExDND8r5jvtUgBWfosbfNg1w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "646338753457-n0l9te1ud5gnb3kbvujtk4bg4qvaqbb7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

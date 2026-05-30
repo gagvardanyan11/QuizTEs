@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="32dp"
+    android:gravity="center"
+    android:background="@drawable/bg_gradient_daily">
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottieLevelUp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="false" /> <!-- Анимация временно отключена: файл @raw/search_animation не найден -->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="НОВЫЙ УРОВЕНЬ!"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvNewLevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Теперь ты 5 уровня"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:alpha="0.9" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnCollect"
+        style="@style/Widget.Material3.Button.TonalButton"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_marginTop="32dp"
+        android:text="КРУТО!"
+        app:cornerRadius="20dp" />
+</LinearLayout>

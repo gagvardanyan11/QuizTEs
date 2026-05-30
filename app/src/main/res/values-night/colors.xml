@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="brand_purple">#818CF8</color>
+    <color name="brand_blue">#60A5FA</color>
+
+    <color name="gray_bg">#0F172A</color> <!-- Темно-синий/черный фон -->
+    <color name="option_bg">#1E293B</color> <!-- Темные карточки -->
+
+    <color name="correct_bg">#22C55E</color>
+    <color name="wrong_bg">#EF4444</color>
+
+    <color name="border_dark">#F8FAFC</color> <!-- Белый текст -->
+    <color name="muted_gray">#94A3B8</color> <!-- Серый текст -->
+    <color name="track_gray">#334155</color> <!-- Темные границы -->
+
+    <color name="correct_light">#064E3B</color> <!-- Темно-зеленый фон для верных -->
+    <color name="wrong_light">#7F1D1D</color>   <!-- Темно-красный фон для неверных -->
+</resources>
