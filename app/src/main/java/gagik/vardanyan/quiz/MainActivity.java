@@ -50,7 +50,14 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        ThemeManager.applyTheme(this);
+l;po0
+
+
+
+    `
+
+        `
+        .ThemeManager.applyTheme(this);
 
         SharedPreferences prefs = getSharedPreferences("app_prefs", MODE_PRIVATE);
         boolean isDark = prefs.getBoolean("dark_mode", false);
